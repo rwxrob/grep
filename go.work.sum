@@ -1,0 +1,8 @@
+github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
+github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=
+github.com/rwxrob/fs v0.17.2 h1:ilZVX64EXVHHpiF5nQW1S8mkBpe9Qb3uHhH9mdx2oU4=
+github.com/rwxrob/fs v0.17.2/go.mod h1:rMLc/faS/eUV9AGsYZp4LptBOlg6HA2EuQqb1E57VNg=
+github.com/rwxrob/uniq v0.5.0 h1:64mksaM2IMMlTC+qi2ckkJRa4MiO8gv+j5gTkd6Btqw=
+github.com/rwxrob/uniq v0.5.0/go.mod h1:ZnCJlZU2MxTT1eXad7CsKUOye6VO0OO17Aih7/GNy1E=
+github.com/rwxrob/vars v0.5.0 h1:QvJwPd6dRvbuuKICh9njQbLOe/8lGPSfbxaibj9hLsQ=
+github.com/rwxrob/vars v0.5.0/go.mod h1:wIDc2cge3U6gHr/FRM+zKWIuczfRGTBGsGTvC5f/hHo=
