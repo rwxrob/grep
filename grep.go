@@ -36,6 +36,11 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 	}
 	for _, target := range targets {
 
+		// just a file
+		if fs.NotExists(target) {
+			continue
+		}
+
 		// recurse if target is a directory
 		if fs.IsDir(target) {
 			for _, entry := range dir.Entries(target) {
@@ -48,10 +53,6 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 			return &results, nil
 		}
 
-		// just a file
-		if fs.NotExists(target) {
-			continue
-		}
 		buf, err := os.ReadFile(target)
 		if err != nil {
 			return nil, err
