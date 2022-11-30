@@ -17,13 +17,16 @@ func init() {
 }
 
 var Cmd = &Z.Cmd{
-	Name:     `grep`,
-	Aliases:  []string{`bongrep`},
-	Summary:  `async grep with regex`,
-	Usage:    `(help|PATTERN)`,
-	UseVars:  true,
-	UseConf:  true,
-	Commands: []*Z.Cmd{help.Cmd},
+	Name:      `grep`,
+	Aliases:   []string{`bongrep`},
+	Copyright: `Copyright 2021 Robert S Muhlestein`,
+	Version:   `v0.1.0`,
+	License:   `Apache-2.0`,
+	Summary:   `async grep with regex`,
+	Usage:     `(help|PATTERN)`,
+	UseVars:   true,
+	UseConf:   true,
+	Commands:  []*Z.Cmd{help.Cmd},
 
 	Description: `
 				The {{aka}} command is what you *actually* want. It transforms the

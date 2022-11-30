@@ -29,6 +29,7 @@ func cached(pattern string) (*regexp.Regexp, error) {
 // if something related to reading the targets involved.
 func This(pattern string, pad int, targets ...string) (*Results, error) {
 	re, err := cached(pattern)
+
 	var results = Results{Hits: []Result{}}
 	if err != nil {
 		return nil, err
@@ -44,6 +45,7 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 				}
 				results.Hits = append(results.Hits, res.Hits...)
 			}
+			return &results, nil
 		}
 
 		// just a file
