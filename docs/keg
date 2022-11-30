@@ -1,0 +1,13 @@
+updated: 2022-11-30 17:57:16Z
+kegv:    2023-01
+
+title:   🌳 Go Grep Stateful Command Branch
+url:     git@github.com:rwxrob/grep.git
+creator: git@github.com:rwxrob/rwxrob.git
+state:   living
+
+indexes:
+  - file: dex/changes.md
+    summary: latest changes
+  - file: dex/nodes.tsv
+    summary: all nodes by id
