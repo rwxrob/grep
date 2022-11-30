@@ -49,6 +49,9 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 		}
 
 		// just a file
+		if fs.NotExists(target) {
+			continue
+		}
 		buf, err := os.ReadFile(target)
 		if err != nil {
 			return nil, err
