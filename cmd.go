@@ -1,7 +1,8 @@
 package grep
 
 import (
-	"log"
+	"fmt"
+	"strconv"
 
 	Z "github.com/rwxrob/bonzai/z"
 	_ "github.com/rwxrob/conf"
@@ -22,7 +23,6 @@ var Cmd = &Z.Cmd{
 	Usage:    `(help|PATTERN)`,
 	UseVars:  true,
 	UseConf:  true,
-	MinArgs:  1,
 	Commands: []*Z.Cmd{help.Cmd},
 
 	Description: `
@@ -51,35 +51,41 @@ var Cmd = &Z.Cmd{
 			`,
 
 	Call: func(x *Z.Cmd, args ...string) error {
-		pattern := args[0]
-		targets := []string{}
-		if len(args) > 1 {
-			targets = args[1:]
+		var padding = 20
+		if len(args) == 0 {
+			return help.Cmd.Call(x, args...)
 		}
-		// TODO get pad from vars
-		pad := 10
-		results, err := This(pattern, pad, targets...)
+		// FIXME Get is hanging infinitely
+		pad, err := x.Get(`padding`)
 		if err != nil {
 			return err
 		}
-		log.Print(results)
+		if pad != "" {
+			padding, err = strconv.Atoi(pad)
+			if err != nil {
+				return err
+			}
+		}
 
-		show, err := x.Get(`show-files`)
-		// TODO add text/template, with default template
+		/*
+			show, err := x.Get(`show-files`)
+			if err != nil {
+				return err
+			}
+		*/
+		if len(args) == 1 {
+			args = append(args, ".")
+		}
+		results, err := This(args[0], padding, args[1:]...)
 		if err != nil {
 			return err
 		}
-		log.Print(show)
-
+		results.ShowFile = true
 		if term.IsInteractive() {
-			//results.PrintPretty(tmpl)
-			// TODO
+			fmt.Print(results.Pretty())
 			return nil
 		}
-		// TODO if terminal is interactive return colored results based on
-		// variables and configuration
-		// TODO if terminal is not interactive assume it is cat or vim and
-		// provide a GitHub compatible markdown link to the line in the file with no color or other escaping.
+		fmt.Print(results)
 		return nil
 	},
 }
