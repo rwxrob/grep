@@ -64,19 +64,17 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 				End:  match[1],
 				File: target,
 			}
-			b := res.Beg - pad
-			e := res.End + pad
-			var badj int
-			if b < 0 {
-				badj = -b
-				b = 0
+			lpad := pad
+			if res.Beg-lpad < 0 {
+				lpad = res.Beg
 			}
-			if e > len(buf) {
-				e = len(buf)
+			rpad := pad
+			if res.End+rpad > len(buf) {
+				rpad = len(buf) - res.End
 			}
-			res.TextBeg = pad - badj
-			res.TextEnd = res.TextBeg + (res.End - res.Beg)
-			res.Text = string(buf[b:e])
+			res.Text = string(buf[res.Beg-lpad : res.End+rpad])
+			res.TextBeg = lpad
+			res.TextEnd = len(res.Text) - rpad
 			results.Hits = append(results.Hits, res)
 		}
 

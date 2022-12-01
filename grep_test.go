@@ -35,7 +35,7 @@ func ExampleThis_String() {
 
 }
 
-func ExampleThis_hit() {
+func ExampleThis_hit_First() {
 	results, err := grep.This(`advent`, 90, `testdata/advent.md`)
 	if err != nil {
 		fmt.Println(err)
@@ -51,5 +51,24 @@ func ExampleThis_hit() {
 	// advent
 	// true
 	// true
+
+}
+
+func ExampleThis_hit_Last() {
+	results, err := grep.This(`holidays`, 90, `testdata/advent.md`)
+	if err != nil {
+		fmt.Println(err)
+	}
+	hit := results.Hits[len(results.Hits)-1]
+	fmt.Printf("%v\n", hit.Text[hit.TextBeg:hit.TextEnd])
+	fmt.Printf("%v:%v\n", hit.Beg, hit.End)
+	fmt.Printf("%v:%v\n", hit.TextBeg, hit.TextEnd)
+	fmt.Printf("%q\n", hit.Text)
+
+	// Output:
+	// holidays
+	// 1585:1593
+	// 90:98
+	// "ires whiteboard interviews, there is something seriously wrong with your view of what the holidays are actually about. It ain't that.\n\n"
 
 }
