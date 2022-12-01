@@ -34,3 +34,22 @@ func ExampleThis_String() {
 	// "Here is a file with some stuff in it\\n\\n\\nand b\nore stuff here with something else\\nhere.\n"
 
 }
+
+func ExampleThis_hit() {
+	results, err := grep.This(`advent`, 90, `testdata/advent.md`)
+	if err != nil {
+		fmt.Println(err)
+	}
+	hit := results.Hits[0]
+	fmt.Printf("%v\n", hit.Text[hit.Beg:hit.End])
+	fmt.Printf("%v\n", hit.Text[hit.TextBeg:hit.TextEnd])
+	fmt.Println(hit.Beg == hit.TextBeg)
+	fmt.Println(hit.End == hit.TextEnd)
+
+	// Output:
+	// advent
+	// advent
+	// true
+	// true
+
+}

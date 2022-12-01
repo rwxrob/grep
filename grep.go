@@ -66,14 +66,17 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 			}
 			b := res.Beg - pad
 			e := res.End + pad
+			var badj, eadj int
 			if b < 0 {
+				badj = -b
 				b = 0
 			}
-			if e > len(buf)-1 {
-				e = len(buf) - 1
+			if e > len(buf) {
+				eadj = e - len(buf)
+				e = len(buf)
 			}
-			res.TextBeg = pad
-			res.TextEnd = res.TextBeg + (res.End - res.Beg)
+			res.TextBeg = pad - badj
+			res.TextEnd = res.TextBeg + (res.End - res.Beg) - eadj
 			res.Text = string(buf[b:e])
 			results.Hits = append(results.Hits, res)
 		}
