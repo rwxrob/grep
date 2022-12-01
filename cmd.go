@@ -20,7 +20,7 @@ var Cmd = &Z.Cmd{
 	Name:      `grep`,
 	Aliases:   []string{`bongrep`},
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
-	Version:   `v0.1.3`,
+	Version:   `v0.2.3`,
 	License:   `Apache-2.0`,
 	Summary:   `async grep with regex`,
 	Usage:     `(help|PATTERN [TARGET ...])`,
