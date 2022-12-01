@@ -2,7 +2,6 @@ package grep
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/rwxrob/term"
 )
@@ -20,7 +19,9 @@ type Result struct {
 }
 
 // Pretty returns a colorized pretty version of the Result with padding
-// around the match and line returns escaped.
+// around the match. Note that no other characters (including line
+// returns and invisible characters) are escaped. That is left to the
+// caller.
 func (r Result) Pretty() string {
 	var str string
 	if r.ShowFile {
@@ -36,9 +37,7 @@ func (r Result) Pretty() string {
 	} else {
 		str += r.Text
 	}
-	str = strings.ReplaceAll(str, "\r", "")
-	str = strings.ReplaceAll(str, "\n", "\\n")
-	return str + "\n"
+	return str
 }
 
 func (r Result) Plain() string {

@@ -28,9 +28,9 @@ require (
 	github.com/rwxrob/compcmd v0.3.0 // indirect
 	github.com/rwxrob/compfile v0.1.12 // indirect
 	github.com/rwxrob/fn v0.3.3 // indirect
-	github.com/rwxrob/pegn v0.2.0 // indirect
+	github.com/rwxrob/pegn v0.2.1 // indirect
 	github.com/rwxrob/structs v0.6.0 // indirect
-	github.com/rwxrob/to v0.11.3 // indirect
+	github.com/rwxrob/to v0.12.1 // indirect
 	github.com/rwxrob/uniq v0.5.0 // indirect
 	github.com/rwxrob/yq v0.3.2 // indirect
 	golang.org/x/crypto v0.3.0 // indirect

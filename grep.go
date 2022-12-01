@@ -73,7 +73,7 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 				e = len(buf) - 1
 			}
 			res.TextBeg = pad
-			res.TextEnd = pad + match[1] - match[0]
+			res.TextEnd = res.TextBeg + (res.End - res.Beg)
 			res.Text = string(buf[b:e])
 			results.Hits = append(results.Hits, res)
 		}
