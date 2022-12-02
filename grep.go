@@ -72,15 +72,21 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 				File: target,
 			}
 
-			left, right := res.Beg-pad, res.End
+			left, right := res.Beg-pad, res.End+pad
+
 			if left < 0 {
 				left = 0
 			}
+			ldiff := res.Beg - left
+
 			if right > len(buf) {
 				right = len(buf)
 			}
 
+			res.TextBeg = ldiff
+			res.TextEnd = ldiff + (res.End - res.Beg)
 			res.Text = string(buf[left:right])
+
 			results.Hits = append(results.Hits, res)
 		}
 
