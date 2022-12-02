@@ -1,6 +1,7 @@
 package grep
 
 import (
+	"fmt"
 	"os"
 	"regexp"
 
@@ -24,16 +25,22 @@ func cached(pattern string) (*regexp.Regexp, error) {
 
 // This (as in grep.This) searches the targets for all instances of the
 // regular expression pattern which is cached. Subsequent searches for
-// the same patter will use the cached compiled regular expression for
-// that pattern. Does not return an error if no results are found, only
+// the same pattern will use the cached compiled regular expression for
+// that pattern. Add pad number of bytes to beginning and ending to
+// give context. Does not return an error if no results are found, only
 // if something related to reading the targets involved.
 func This(pattern string, pad int, targets ...string) (*Results, error) {
 	re, err := cached(pattern)
+
+	if pad < 0 {
+		return nil, fmt.Errorf("padding must be positive: %v", pad)
+	}
 
 	var results = Results{Hits: []Result{}}
 	if err != nil {
 		return nil, err
 	}
+
 	for _, target := range targets {
 
 		// just a file
@@ -64,17 +71,16 @@ func This(pattern string, pad int, targets ...string) (*Results, error) {
 				End:  match[1],
 				File: target,
 			}
-			lpad := pad
-			if res.Beg-lpad < 0 {
-				lpad = res.Beg
+
+			left, right := res.Beg-pad, res.End
+			if left < 0 {
+				left = 0
 			}
-			rpad := pad
-			if res.End+rpad > len(buf) {
-				rpad = len(buf) - res.End
+			if right > len(buf) {
+				right = len(buf)
 			}
-			res.Text = string(buf[res.Beg-lpad : res.End+rpad])
-			res.TextBeg = lpad
-			res.TextEnd = len(res.Text) - rpad
+
+			res.Text = string(buf[left:right])
 			results.Hits = append(results.Hits, res)
 		}
 
